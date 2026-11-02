@@ -94,34 +94,3 @@ not require a paid API or Hugging Face token.
 1. `A small wooden cabin beside a reflective alpine lake at sunrise`
 2. `A friendly robot librarian in a magical library full of floating books`
 3. `A futuristic Indian city street during monsoon, glowing neon reflections`
-
-## Troubleshooting
-
-- **CUDA is False:** Confirm `nvidia-smi`, install a matching CUDA PyTorch
-  wheel, and restart the terminal. The app still runs using CPU.
-- **Out of memory:** Close GPU applications, use 10-15 steps, or use CPU mode.
-  The app already enables attention slicing and model CPU offloading.
-- **Model download fails:** Check internet access, available disk space, and
-  retry. Diffusion model files are large.
-- **PowerShell activation is blocked:** Run
-  `Set-ExecutionPolicy -Scope Process Bypass`, then activate the environment.
-- **Generation is slow:** This is expected on CPU and during the first model
-  download. A laptop RTX 3050 may still take tens of seconds per image.
-
-## Viva questions and answers
-
-1. **What is diffusion?** It learns to reverse a gradual noise process, starting
-   from random latent noise and denoising it into an image.
-2. **What does CLIP do?** CLIP's text encoder converts the prompt into an
-   embedding that guides the U-Net during denoising.
-3. **What is the U-Net?** It predicts noise at each denoising timestep.
-4. **What does the VAE do?** It decodes the final latent representation into
-   pixel-space image data.
-5. **Why use FP16?** Half precision reduces VRAM usage and usually speeds up
-   compatible NVIDIA GPU inference.
-6. **What are inference steps?** The number of denoising iterations; more steps
-   can improve quality but increase runtime.
-7. **Why use a negative prompt?** It describes unwanted visual properties such
-   as blur, distortion, or watermarks.
-8. **Why cache the pipeline?** Streamlit reruns the script after interactions;
-   resource caching prevents reloading the multi-gigabyte model every time.
